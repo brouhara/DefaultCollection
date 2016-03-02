@@ -1,0 +1,72 @@
+@ Wrapper Function
+
+Every Gruntfile (and gruntplugin) uses 
+this basic format, and all of your
+Grunt code must be specified inside 
+this function:
+
+module.exports = function(grunt) {
+  // Do grunt-related things in here
+};
+
+@Project and task configuration
+
+    Most Grunt tasks rely on 
+        configuration data defined in an object
+        passed to the grunt.initConfig method.
+
+    In this example, 
+    
+        grunt.file.readJSON('package.json')
+            imports the JSON metadata stored in package.json into the grunt config.
+        
+        Because <% %> template strings may reference
+            any config properties, 
+    
+        configuration data like
+            file paths and file lists 
+            may be specified this way to
+                reduce repetition.
+
+You may store any arbitrary data inside of 
+the configuration object, and as long as it
+doesn't conflict with properties your tasks
+require, it will be otherwise ignored. 
+
+Also, because this is JavaScript,
+    you're not limited to JSON; 
+    you may use any valid JS here.
+
+You can even programmatically generate the 
+configuration if necessary.
+
+Like most tasks, the
+    grunt-contrib-uglify plugin's uglify task
+        expects its configuration to be specified in a property of the same name.
+
+Here, the 
+    banner option is specified, along with a 
+    single uglify target named build
+    
+    that minifies a single source file 
+    to a single destination file.
+
+// Project configuration.
+
+// Wrapper Function
+grunt.initConfig({
+
+    // Configuration File
+    pkg: grunt.file.readJSON('package.json'),
+
+    // Task  
+    uglify: {
+        options: {
+            banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        },
+        build: {
+            src: 'src/<%= pkg.name %>.js',
+            dest: 'build/<%= pkg.name %>.min.js'
+        }
+    }
+});

@@ -1,0 +1,7 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+        // Controls after how many characters comments are wrapped.
+    "rewrap.wrappingColumn": 50,
+    "eslint.enable":true,
+    "jslint.enable": true
+}

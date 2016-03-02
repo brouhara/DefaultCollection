@@ -1,0 +1,20 @@
+npm install --global gulp-cli
+npm install --save-dev gulp
+
+
+gulpfile.js
+
+var gulp = require('gulp');
+
+gulp.task('default', function() {
+  // place code for your default task here
+});
+
+4. Run gulp:
+
+$ gulp
+
+The default task will run and do nothing.
+To run individual tasks, use  gulp <task> <othertask> .
+
+

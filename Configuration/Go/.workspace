@@ -1,0 +1,35 @@
+To give you an idea of how a workspace looks in practice, here's an example: 
+
+
+bin/
+    hello                          # command executable
+    outyet                         # command executable
+pkg/
+    linux_amd64/
+        github.com/golang/example/
+            stringutil.a           # package object
+src/
+    github.com/golang/example/
+        .git/                      # Git repository metadata
+    hello/
+        hello.go               # command source
+    outyet/
+        main.go                # command source
+        main_test.go           # test source
+    stringutil/
+        reverse.go             # package source
+        reverse_test.go        # test source
+
+This workspace contains one repository (example) comprising
+ two commands (hello and outyet) and one library (stringutil). 
+
+(Note: repository is github.com/golang/example)
+
+A typical workspace would contain many source repositories 
+containing many packages and commands. 
+
+Most Go programmers keep all their Go source code and dependencies in a single workspace. 
+
+Commands and libraries are built from different kinds of source packages.
+
+We will discuss the distinction later. 

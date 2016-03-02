@@ -1,0 +1,15 @@
+Running Grunt
+
+Executing the grunt command in your terminal
+     will run all of the tasks specified in your default task.
+
+You can also run tasks individually
+     by passing the task name to the grunt command.
+
+Example:
+    
+    // Run default tasks
+    grunt 
+    
+    // Runs the task with the name 'dev'
+    grunt dev 

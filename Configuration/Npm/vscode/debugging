@@ -1,0 +1,11 @@
+click on debug
+
+    click on Play button
+    
+    Generates new Launch.json file
+    
+        Asks for user to configure
+
+        Configure for current file
+            
+            Change main to ${file}

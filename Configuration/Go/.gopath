@@ -1,0 +1,19 @@
+
+
+The GOPATH environment variable specifies the location of your workspace.
+It is likely the only environment variable you'll need to set when developing Go code. 
+
+To get started, create a workspace directory and set GOPATH accordingly.
+
+Your workspace can be located wherever you like, but we'll use $HOME/work in this document.
+Note that this must not be the same path as your Go installation.
+
+(Another common setup is to set GOPATH=$HOME.) 
+$ mkdir $HOME/work
+$ export GOPATH=$HOME/work
+
+For convenience, add the workspace's bin subdirectory to your PATH: 
+$ export PATH=$PATH:$GOPATH/bin
+
+
+To learn more about setting up the GOPATH environment variable, please see go help gopath 

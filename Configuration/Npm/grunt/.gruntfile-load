@@ -1,0 +1,8 @@
+Loading Grunt plugins and tasks
+
+Many commonly used tasks like concatenation, minification and linting are available as grunt plugins. As long as a plugin is specified in package.json as a dependency, and has been installed via npm install, it may be enabled inside your Gruntfile with a simple command:
+
+// Load the plugin that provides the "uglify" task.
+grunt.loadNpmTasks('grunt-contrib-uglify');
+
+Note: the grunt --help command will list all available tasks.

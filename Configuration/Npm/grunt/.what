@@ -1,0 +1,104 @@
+Grunt is a command line task runner which
+is used to automate the common repetitive 
+tasks like minification of files, 
+beautification of files etc.. during the
+ development of web application.
+
+Purpose: 
+
+    We use Grunt to minify, mangle and 
+    concatenate CSS and JavaScript files. This
+    is useful on production websites where 
+    it is important to reduce the amount of 
+    data sent to the client. We are also 
+    using it to compress images.
+
+    But then Grunt can be used to handle a 
+    lot of repetitive tasks via the 
+    plethora of plugins that it supports. 
+    The list of Grunt plugins can be found
+    here.
+
+Installation:
+
+    You can install the Grunt CLI using NPM. 
+    Run the following command in the terminal,
+
+    > npm install -g grunt-cli
+
+    You can install Grunt and its plugins
+    in your application. For example, the 
+    following command will install the latest
+    version of Grunt in your application
+    and it will automatically add to the 
+    devDependencies section in the package.json
+    file of your application
+
+    > npm install grunt –save-dev
+
+Package.json
+
+    Then the devDependencies section of your
+    package.json file will be updated as follows,
+
+    "devDependencies": { 
+        "grunt": "0.4.1" 
+    }
+
+Gruntfile.js
+
+    Next you need a create a file with name 
+    Gruntfile.js or Gruntfile.coffee in the 
+    path where the package.json file is located.
+
+    This is the file where you create and 
+    configure the tasks that you want to run
+    using Grunt.
+
+Methods:
+
+    The project configuration is handled by
+    the grunt.initConfig method in the Gruntfile.
+
+Configuration:
+
+    An object with the project configurations 
+    and tasks configuration, if any, should be
+    passed to this method.
+
+Importing:
+
+    Generally, the 
+    pkg: grunt.file.readJSON(‘package.json’) line
+    will import the project configuration.
+
+Example:
+
+    Now, the Gruntfile looks like as follows,
+
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json
+    });
+
+Example:
+
+    For example,
+    the below code will perform two tasks,
+    one is for minification of the files and
+    another one is for the beautification 
+        (maintains the indent spacing of the lines,
+        wrapping of the lines etc..) 
+    of the files.
+
+    grunt.initConfig({
+
+        pkg: grunt.file.readJSON('package.json', 
+                uglify: {
+                    prodclient: { files: ['app.js'] }, 
+                    options: { mangle: true },
+                },
+                jsbeautifier: {
+                    files: ['app.js' ],
+                    options: { js: { indentChar: ' ', indentSize: 2} }
+                }
+        });

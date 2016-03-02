@@ -1,0 +1,17 @@
+
+1 of the 2
+
+npm install -g grunt-cli
+npm install -g gulp-util
+npm install -g gulp-concat
+
+		||
+
+npm install -g gulp-cli
+npm install -g gulp-util
+npm install -g gulp-concat
+
+
+npm install --save-dev gulp
+npm install --save-dev gulp-jshint
+

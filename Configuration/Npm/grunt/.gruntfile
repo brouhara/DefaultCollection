@@ -1,0 +1,58 @@
+
+// http://gruntjs.com/installing-grunt
+
+A Gruntfile is comprised of the following parts:
+    •The "wrapper" function
+    •Project and task configuration
+    •Loading Grunt plugins and tasks
+    •Custom tasks
+
+In the following Gruntfile,
+    project metadata is imported
+        into the Grunt config 
+    from the project's
+        package.json file and the
+        grunt-contrib-uglify 
+
+    the plugin's uglify task is 
+        configured to minify a source file and
+        generate a banner comment dynamically using that metadata. 
+        
+    When grunt is run on the command line,
+        the uglify task will be run by default.
+
+Example:
+
+    // Module Handler Node
+    module.exports = function(grunt) {
+
+        // Project configuration.
+        grunt.initConfig({
+        
+            // Read in the Package Configuration
+            pkg: grunt.file.readJSON('package.json'),
+            
+            // Specify a grunt plugin grunt-uglify task
+            uglify: {
+            
+                options: { 
+                    banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                },
+                
+                build: {
+                    src: 'src/<%= pkg.name %>.js',
+                    dest: 'build/<%= pkg.name %>.min.js'
+                }
+                
+            }
+        }
+        
+    });
+
+    // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+
+    // Default task(s).
+    grunt.registerTask('default', ['uglify']);
+
+};

@@ -1,0 +1,29 @@
+
+
+The packages from the standard library 
+are given short paths such as "fmt" and "net/http".
+
+For your own packages, you must choose a base path
+ that is unlikely to collide with future additions 
+ to the standard library or other external libraries. 
+
+If you keep your code in a source repository somewhere,
+ then you should use the root of that source repository 
+ as your base path.
+ 
+For instance, if you have a GitHub account at 
+ github.com/user, that should be your base path. 
+
+Note that you don't need to publish your code to a remote
+ repository before you can build it. It's just a good habit 
+ to organize your code as if you will publish it someday.
+ 
+In practice you can choose any arbitrary path name, 
+as long as it is unique to the standard library and
+ greater Go ecosystem. 
+
+We'll use github.com/user as our base path. Create a directory
+inside your workspace in which to keep source code: 
+
+$ mkdir -p $GOPATH/src/github.com/user
+

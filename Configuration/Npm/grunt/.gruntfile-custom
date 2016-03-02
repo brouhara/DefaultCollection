@@ -1,0 +1,305 @@
+// http://gruntjs.com/configuring-tasks
+
+Custom tasks
+
+You can configure Grunt to run one or more tasks
+    by default 
+    by defining
+        a default task. 
+
+In the following example,
+    running grunt at the command line 
+    without specifying a task 
+    will run the uglify task.
+    
+This is functionally the same as 
+    explicitly running grunt uglify
+     or even grunt default.
+
+Any number of tasks (with or without arguments)
+    may be specified in the array.
+        
+Example:
+
+    // Default task(s).
+    grunt.registerTask('default', ['uglify']);
+
+
+    If your project requires tasks not provided by a Grunt plugin,
+    you may define custom tasks right inside the Gruntfile.
+
+    For example,
+        this Gruntfile defines a completely custom default task
+        that doesn't even utilize task configuration:
+
+        module.exports = function(grunt) {
+
+            // A very basic default task.
+            grunt.registerTask( 'default', 'Log some stuff.', function() {
+                grunt.log.write('Logging some stuff...').ok();
+            });
+
+        };
+    
+    
+    
+    
+    Custom, project-specific, tasks
+        do not need to be defined in the Gruntfile; 
+        they may be defined in external .js files
+            and loaded via the grunt.loadTasks method.
+        
+    grunt.initConfig({
+    
+        concat: {
+            // concat task configuration goes here.
+        },
+        uglify: {
+            // uglify task configuration goes here.
+        },
+        
+        // Arbitrary non-task-specific properties.
+        my_property: 'whatever',
+        my_src_files: ['foo/*.js', 'bar/*.js'],
+        
+    });
+
+Task Configuration and Targets
+
+    When a task is run, 
+        Grunt looks for its configuration
+            under a property of the same name.
+        
+    Multi-tasks can have 
+        multiple configurations defined
+            by using, arbitrarily named "targets."
+
+            
+            
+            
+    In the example below, 
+        the concat task has foo and bar targets,
+        while the uglify task only has a bar target.
+
+    grunt.initConfig({
+    
+        concat: {
+            foo: {
+                // concat task "foo" target options and files go here.
+            },
+            bar: {
+                // concat task "bar" target options and files go here.
+            },
+        },
+        
+        uglify: {
+            bar: {
+                // uglify task "bar" target options and files go here.
+            },
+        },
+    });
+
+
+
+    Specifying
+        both a task and target like
+            grunt concat:foo or
+            grunt concat:bar 
+        
+        will process 
+            just the specified target's configuration,
+    
+        while running grunt concat 
+            will iterate over all targets,
+            processing each in turn. 
+    
+        Note that 
+            if a task has been renamed
+                with grunt.task.renameTask,
+    
+            Grunt will look for a property 
+                with the new task name
+
+            in the config object.
+
+Options
+
+    Inside a task configuration, 
+        an options property may be specified to override built-in defaults.
+    
+    In addition, 
+        each target may have an options property which is specific to that target.
+    
+    Target-level options 
+        will override task-level options.
+
+
+    The options object is optional and may be omitted if not needed.
+    
+    grunt.initConfig({
+        concat: {
+            options: {
+                // Task-level options may go here, overriding task defaults.
+            },
+            foo: {
+                options: {
+                    // "foo" target options may go here, overriding task-level options.
+                },
+                },
+                bar: {
+                    // No options specified; this target will use task-level options.
+                },
+        },
+    });
+
+
+Configuring tasks
+
+This guide explains how to configure tasks for your project using a Gruntfile. If you don't know what a Gruntfile is, please read the Getting Started guide and check out a Sample Gruntfile.
+
+Grunt Configuration
+
+Task configuration is specified in your Gruntfile via the grunt.initConfig method. This configuration will mostly be under task-named properties, but may contain any arbitrary data. As long as properties don't conflict with properties your tasks require, they will be otherwise ignored.
+
+Also, because this is JavaScript, you're not limited to JSON; you may use any valid JavaScript here. You may even programmatically generate the configuration if necessary.
+grunt.initConfig({
+  concat: {
+    // concat task configuration goes here.
+  },
+  uglify: {
+    // uglify task configuration goes here.
+  },
+  // Arbitrary non-task-specific properties.
+  my_property: 'whatever',
+  my_src_files: ['foo/*.js', 'bar/*.js'],
+});
+
+Task Configuration and Targets
+
+When a task is run, Grunt looks for its configuration under a property of the same name. Multi-tasks can have multiple configurations, defined using arbitrarily named "targets." In the example below, the concat task has foo and bar targets, while the uglify task only has a bar target.
+grunt.initConfig({
+  concat: {
+    foo: {
+      // concat task "foo" target options and files go here.
+    },
+    bar: {
+      // concat task "bar" target options and files go here.
+    },
+  },
+  uglify: {
+    bar: {
+      // uglify task "bar" target options and files go here.
+    },
+  },
+});
+
+Specifying both a task and target like grunt concat:foo or grunt concat:bar will process just the specified target's configuration, while running grunt concat will iterate over all targets, processing each in turn. Note that if a task has been renamed with grunt.task.renameTask, Grunt will look for a property with the new task name in the config object.
+
+Options
+
+Inside a task configuration, an options property may be specified to override built-in defaults. In addition, each target may have an options property which is specific to that target. Target-level options will override task-level options.
+
+The options object is optional and may be omitted if not needed.
+grunt.initConfig({
+  concat: {
+    options: {
+      // Task-level options may go here, overriding task defaults.
+    },
+    foo: {
+      options: {
+        // "foo" target options may go here, overriding task-level options.
+      },
+    },
+    bar: {
+      // No options specified; this target will use task-level options.
+    },
+  },
+});
+
+Files
+
+    Because most tasks perform file operations,
+         Grunt has powerful abstractions for 
+            declaring on which files the task should operate. 
+    
+    There are several ways to define src-dest (source-destination) file mappings,
+        offering varying degrees of verbosity and control. 
+     
+     Any multi task will understand all the following formats,
+        so choose whichever format best meets your needs.
+
+    All files formats
+        support src and dest but 
+    
+    
+    
+    the "Compact" and "Files Array" formats 
+        support a few additional properties:
+        
+            •filter
+                Either a valid fs.Stats method name
+                or a function that is passed the matched src filepath
+                    and returns true or false. 
+                    See examples
+                    
+            •nonull
+                If set to true then 
+                the operation will include non-matching patterns. Combined with grunt's --verbose flag, this option can help debug file path issues.
+       
+            •dot 
+                Allow patterns to 
+                match filenames starting with a period, even if the pattern does not explicitly have a period in that spot.
+           
+            •matchBase
+                If set,
+                    patterns without slashes 
+                        will be matched against 
+                            the basename of the path
+                            if it contains slashes.
+                For example,
+                    a?b would match
+                        the path /xyz/123/acb,
+                        but not /xyz/acb/123.
+                        
+            •expand 
+                Process a dynamic 
+                    src-dest file mapping, 
+                    
+                see "Building the files object dynamically" for more information.
+                
+            •Other 
+                    properties will be passed 
+                        into the underlying libs
+                        as matching options. 
+                    
+                    See the node-glob and minimatch documentation for more options.
+
+Compact Format
+
+This form allows a 
+    single src-dest (source-destination) file mapping per-target. 
+    
+    It is most commonly used for read-only tasks, 
+        like grunt-contrib-jshint, 
+            where a single src property is needed, 
+            and no dest key is relevant. 
+        
+    This format also supports 
+        additional properties per src-dest file mapping.
+        
+    Example: 
+    
+        grunt.initConfig({
+            jshint: {
+                foo: {
+                    src: ['src/aa.js', 'src/aaa.js']
+                },
+            },
+            concat: {
+                bar: {
+                    src: ['src/bb.js', 'src/bbb.js'],
+                    dest: 'dest/b.js',
+                },
+            },
+        });
+

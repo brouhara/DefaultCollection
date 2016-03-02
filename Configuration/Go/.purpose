@@ -1,0 +1,7 @@
+The go tool is designed to work with open source code maintained in public repositories.
+Although you don't need to publish your code, the model for how the environment is set up works the same whether you do or not. 
+
+Go code, must be kept inside a workspace.
+A workspace, is a directory hierarchy with three directories at its root: 
+
+The go tool builds source packages and installs the resulting binaries to the pkg and bin directories. 

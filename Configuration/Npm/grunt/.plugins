@@ -1,0 +1,62 @@
+
+Grunt plugins
+
+Grunt plugins are the components to 
+perform the specific tasks using Grunt.
+You can find more Grunt plugins from here.
+
+http://gruntjs.com/plugins
+
+
+Loading the grunt plugins
+
+To perform the tasks mentioned in the
+above example,  we are using following
+plugins,
+
+◾grunt-contrib-uglify and
+◾grunt-jsbeautifier
+
+Remember to mention these plugins 
+information in package.json file under
+devDependencies section and run npm 
+install.
+
+Then load these plugins in the 
+Gruntfile as follows,
+
+> grunt.loadNpmTasks('grunt-contrib-uglify');
+> grunt.loadNpmTasks("grunt-jsbeautifier");
+
+Registering the tasks
+
+The grunt.registerTask method is used
+specify a default set of tasks that 
+should run when the grunt command is
+executed.
+
+> grunt.registerTask('default', [ 'uglify:prodclient']);
+> grunt.registerTask('dev', ['jsbeautifier']);
+
+The first parameter of this method 
+specifies the name of the task 
+(in this case ‘default’) and the 
+second contains an array of the tasks
+you wish to be executed.
+
+Running Grunt
+
+Executing the grunt command in your 
+terminal will run all of the tasks 
+specified in your default task.
+
+You can also run tasks individually 
+by passing the task name to the grunt
+command.
+
+    grunt // Runs default tasks
+grunt dev // Just runs the task with the name 'dev'
+
+You can find more information about
+Grunt from here.
+

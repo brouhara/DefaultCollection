@@ -1,0 +1,7 @@
+
+@ Checking Bower Installation
+
+    > bower list
+        codeacademy G:\Javascripts\CodeAcademy
+ 
+    Lists the Bower Projects in the current Dir 
